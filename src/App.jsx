@@ -1,12 +1,13 @@
-﻿import { useState, useEffect } from 'react';
+﻿import { useState } from 'react';
+import { useApiRequest } from './hooks/useApiRequest'
 import './App.css';
 
 //Url que contem o caminho para o objeto produto, na API.
 const urlApiProduct = "http://localhost:3000/products";
 
 function App() {
-    //Reservado para armazenar o objeto produto, no banco de dados
-    const [products, setProducts] = useState([]);
+
+    const { data, httpConfig } = useApiRequest(urlApiProduct);
 
     //Reservado para as chaves do objeto produto
     const [name, setName] = useState("");
@@ -14,43 +15,24 @@ function App() {
     const [price, setPrice] = useState("");
     const [available, setAvailable] = useState(false);
 
-    //Responsável por buscar o objeto produto, via Http GET na API.
-    useEffect(() => {
-        async function fetchData() {
-            const res = await fetch(urlApiProduct);
-            const data = await res.json();
-            setProducts(data);
-        }
-        fetchData();
-    }, []);
-
     //Responsável por armazenar e alterar o valor
-    //da da constante available, no momento da ação
+    //da constante "available", no momento da ação
     //do checkbox do formulário
     const handleCheckboxChange = () => {
         setAvailable(!available); // Inverte o valor da constante
     };
 
-    //Responsávle por enviar, via POST, e adiciar mais um item
-    //ao objeto produto, no banco de dados
-    const handleSubmit = async (e) => {
+    //Responsável por adicionar, via POST, um produto ao banco de dados
+    //Após, recupera o produto adicionado e atualiza a lista atual
+    const handlePost = async (e) => {
         e.preventDefault();
-
         const product = {
             name,
             description,
             price,
             available
         };
-
-        const res = await fetch(urlApiProduct, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(product)
-        });
-
-        const addedProduct = await res.json();
-        setProducts((prevProducts) => [...prevProducts, addedProduct]);
+        httpConfig(product, "POST");
         clearInputs();
     };
 
@@ -65,7 +47,7 @@ function App() {
         <>
             <h1>Lista de produtos</h1>
             {
-                products.map((product) => (
+                data && data.map((product) => (
                     <div key={product.id}>
                         <h3>{product.name}</h3>
                         <ul>
@@ -85,7 +67,7 @@ function App() {
                 ))
             }
             <div className="add-product">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handlePost}>
                     <label>
                         <span>Nome</span>
                         <input

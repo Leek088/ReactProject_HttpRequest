@@ -1,49 +1,49 @@
 {
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Jaleco",
       "description": "Jaleco de alta qualidade fabricado para atender aos clientes mais exigentes",
       "price": "R$ 999,99",
       "available": true
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Avental",
       "description": "Jaleco de alta qualidade fabricado para atender aos clientes mais exigentes",
       "price": "R$ 999,99",
       "available": false
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Touca",
       "description": "Jaleco de alta qualidade fabricado para atender aos clientes mais exigentes",
       "price": "R$ 999,99",
       "available": true
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Fronha",
       "description": "Jaleco de alta qualidade fabricado para atender aos clientes mais exigentes",
       "price": "R$ 999,99",
       "available": false
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Embalagem",
       "description": "Jaleco de alta qualidade fabricado para atender aos clientes mais exigentes",
       "price": "R$ 999,99",
       "available": true
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Porta talher",
       "description": "Jaleco de alta qualidade fabricado para atender aos clientes mais exigentes",
       "price": "R$ 999,99",
       "available": false
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Porta absorvente",
       "description": "Jaleco de alta qualidade fabricado para atender aos clientes mais exigentes",
       "price": "R$ 999,99",
@@ -82,6 +82,41 @@
       "name": "Ventilador",
       "description": "Seis hélices, cor preta, quatro velocidades.",
       "price": "125.5",
+      "available": true
+    },
+    {
+      "id": "bec0",
+      "name": "Rádio Mondial",
+      "description": "Mini system 300w",
+      "price": "180.85",
+      "available": true
+    },
+    {
+      "id": "ecd7",
+      "name": "Coca cola",
+      "description": "Coca cola de dois litros.",
+      "price": "8.00",
+      "available": true
+    },
+    {
+      "id": "123b",
+      "name": "Fone de ouvido",
+      "description": "Fones de ouvido branco",
+      "price": "220.00",
+      "available": false
+    },
+    {
+      "id": "9f4f",
+      "name": "teste",
+      "description": "teste",
+      "price": "12",
+      "available": false
+    },
+    {
+      "id": "5309",
+      "name": "teste3",
+      "description": "teste3",
+      "price": "12",
       "available": true
     }
   ]
