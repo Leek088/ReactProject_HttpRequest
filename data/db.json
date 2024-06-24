@@ -1,0 +1,123 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Jaleco",
+      "description": "Jaleco de alta qualidade fabricado para atender aos clientes mais exigentes",
+      "price": "R$ 999,99",
+      "available": true
+    },
+    {
+      "id": "2",
+      "name": "Avental",
+      "description": "Jaleco de alta qualidade fabricado para atender aos clientes mais exigentes",
+      "price": "R$ 999,99",
+      "available": false
+    },
+    {
+      "id": "3",
+      "name": "Touca",
+      "description": "Jaleco de alta qualidade fabricado para atender aos clientes mais exigentes",
+      "price": "R$ 999,99",
+      "available": true
+    },
+    {
+      "id": "4",
+      "name": "Fronha",
+      "description": "Jaleco de alta qualidade fabricado para atender aos clientes mais exigentes",
+      "price": "R$ 999,99",
+      "available": false
+    },
+    {
+      "id": "5",
+      "name": "Embalagem",
+      "description": "Jaleco de alta qualidade fabricado para atender aos clientes mais exigentes",
+      "price": "R$ 999,99",
+      "available": true
+    },
+    {
+      "id": "6",
+      "name": "Porta talher",
+      "description": "Jaleco de alta qualidade fabricado para atender aos clientes mais exigentes",
+      "price": "R$ 999,99",
+      "available": false
+    },
+    {
+      "id": "7",
+      "name": "Porta absorvente",
+      "description": "Jaleco de alta qualidade fabricado para atender aos clientes mais exigentes",
+      "price": "R$ 999,99",
+      "available": true
+    },
+    {
+      "id": "d0a7",
+      "name": "Travesseiro",
+      "description": "De plumas e algodão",
+      "price": "25",
+      "available": true
+    },
+    {
+      "id": "9084",
+      "name": "Bola de basquete",
+      "description": "Bola para basquete, amarela.",
+      "price": "35.5",
+      "available": false
+    },
+    {
+      "id": "a0cf",
+      "name": "Cadeira",
+      "description": "Cadeira de plástico,branca, para sala.",
+      "price": "80",
+      "available": true
+    },
+    {
+      "id": "166b",
+      "name": "Nintendo Switch",
+      "description": "Videogame infantil, na cor vermelha",
+      "price": "1800",
+      "available": true
+    },
+    {
+      "id": "5a67",
+      "name": "Ventilador",
+      "description": "Seis hélices, cor preta, quatro velocidades.",
+      "price": "125.5",
+      "available": true
+    },
+    {
+      "id": "bec0",
+      "name": "Rádio Mondial",
+      "description": "Mini system 300w",
+      "price": "180.85",
+      "available": true
+    },
+    {
+      "id": "ecd7",
+      "name": "Coca cola",
+      "description": "Coca cola de dois litros.",
+      "price": "8.00",
+      "available": true
+    },
+    {
+      "id": "123b",
+      "name": "Fone de ouvido",
+      "description": "Fones de ouvido branco",
+      "price": "220.00",
+      "available": false
+    },
+    {
+      "id": "1a27",
+      "name": "Cafeteira ELetrolux",
+      "description": "Cafeteira inox para café expresso",
+      "price": "500.45",
+      "available": false
+    },
+    {
+      "id": "2ea0",
+      "name": "Mouse Gamer",
+      "description": "Mouse extreme 300dpi",
+      "price": "158.90",
+      "available": true
+    }
+  ]
+}
