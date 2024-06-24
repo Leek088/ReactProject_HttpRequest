@@ -106,17 +106,17 @@
       "available": false
     },
     {
-      "id": "9f4f",
-      "name": "teste",
-      "description": "teste",
-      "price": "12",
+      "id": "1a27",
+      "name": "Cafeteira ELetrolux",
+      "description": "Cafeteira inox para café expresso",
+      "price": "500.45",
       "available": false
     },
     {
-      "id": "5309",
-      "name": "teste3",
-      "description": "teste3",
-      "price": "12",
+      "id": "2ea0",
+      "name": "Mouse Gamer",
+      "description": "Mouse extreme 300dpi",
+      "price": "158.90",
       "available": true
     }
   ]

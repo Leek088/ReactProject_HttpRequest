@@ -1,28 +1,41 @@
-import { useEffect, useState } from "react";
+Ôªøimport { useEffect, useState } from "react";
 
 export const useApiRequest = (url) => {
     const [data, setData] = useState(null);
-
     const [config, setConfig] = useState(null);
     const [method, setMethod] = useState(null);
     const [callFetch, setCallFetch] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [idDelete, setIdDelete] = useState("");
 
-    //Respons·vel por trazer os dados da API.
-    //Faz a requisiÁ„o sempre que a "url" È enviada.
-    //Faz a requisiÁ„o sempre que o "callFeth" È atualizado.
+    //Na atualiza√ß√£o dos dados GET, Insert POST e DELETE
+    //ser√° armazenado uma mensagem de erro, caso exista    
+    const [error, setError] = useState(null);
+
+    //Respons√°vel por trazer os dados da API.
+    //Faz a requisi√ß√£o sempre que a "url" √© enviada.
+    //Faz a requisi√ß√£o sempre que o "callFeth" √© atualizado.
+    //Muda o estado do carregamento (true\false)
     useEffect(() => {
         const fetchData = async () => {
-            const res = await fetch(url);
-            const json = await res.json();
-            setData(json);
-            setMethod(null);
+            try {
+                setLoading(true);
+                const res = await fetch(url);
+                const json = await res.json();
+                setData(json);
+                setMethod(null);
+                setLoading(false);
+            } catch (error) {
+                setError("N√£o foi poss√≠vel buscar os dados!");
+                console.log(error.message);
+            }
         };
         fetchData();
     }, [url, callFetch]);
 
-    //Respons·vel por gerar a configuraÁ„o do metodo POST.
-    //ApÛs, atualiza a constante "config" com essa configuraÁ„o.
-    //ApÛs, atualiza a constante "method" para POST.
+    //Respons√°vel por gerar a configura√ß√£o do metodo POST ou DELETE.
+    //Ap√≥s, atualiza a constante "config" com essa configura√ß√£o.
+    //Ap√≥s, atualiza a constante "method" para POST ou DELETE.
     const httpConfig = (data, method) => {
         if (method === "POST") {
             setConfig({
@@ -33,23 +46,48 @@ export const useApiRequest = (url) => {
                 body: JSON.stringify(data),
             });
             setMethod("POST");
+        } else if (method === "DELETE") {
+            setConfig({
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            });
+            setIdDelete(data.id);
+            setMethod("DELETE");
         }
     };
 
-    //Responsavel por inserir um registro na Api.
-    //… acionado sempre que a "config" È atualizada
-    //ApÛs, atualiza a constante "callFetch"
+    //Responsavel por inserir ou apagar um registro na Api.
+    //√â acionado sempre que a "config" √© atualizada
+    //Ap√≥s, atualiza a constante "callFetch"
     useEffect(() => {
         const httpRequest = async () => {
-            if (method === "POST") {
-                let fetchOptions = [url, config];
-                const res = await fetch(...fetchOptions);
-                const json = await res.json();
-                setCallFetch(json);
+            try {
+                setLoading(true);
+                if (method === "POST") {
+                    let fetchOptions = [url, config];
+                    const res = await fetch(...fetchOptions);
+                    const json = await res.json();
+                    setCallFetch(json);
+                } else if (method === "DELETE") {
+                    let fetchOptions = [`${url}/${idDelete}`, config]
+                    const res = await fetch(...fetchOptions);
+                    const json = await res.json();
+                    setCallFetch(json);
+                }
+                setLoading(false);
+            } catch (error) {
+                setError("N√£o foi poss√≠vel inserir os dados!");
+                console.log(error.message);
             }
         };
         httpRequest();
     }, [config]);
 
-    return { data, httpConfig };
+    //Retorna registros da API "data".
+    //Retorna a fun√ß√£o respons√°vel pelo POST "httpConfig".
+    //Retorna o estado de carregamento (true\false)
+    //Retorna a constante que pode ou n√£o conter erros
+    return { data, httpConfig, loading, error };
 };

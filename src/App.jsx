@@ -2,14 +2,17 @@
 import { useApiRequest } from './hooks/useApiRequest'
 import './App.css';
 
-//Url que contem o caminho para o objeto produto, na API.
+//Url da Api que contem os registros dos produtos.
 const urlApiProduct = "http://localhost:3000/products";
 
 function App() {
 
-    const { data, httpConfig } = useApiRequest(urlApiProduct);
+    //Recupeara, no carregamento da página, 
+    //os produtos, a função de Post e o estado de carregamento.
+    const { data, httpConfig, loading, error } = useApiRequest(urlApiProduct);
 
     //Reservado para as chaves do objeto produto
+    const [id, setId] = useState("");
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
@@ -23,7 +26,7 @@ function App() {
     };
 
     //Responsável por adicionar, via POST, um produto ao banco de dados
-    //Após, recupera o produto adicionado e atualiza a lista atual
+    //Utiliza a função httpConfig, passando o objeto e o metodo.
     const handlePost = async (e) => {
         e.preventDefault();
         const product = {
@@ -36,7 +39,18 @@ function App() {
         clearInputs();
     };
 
+    //Responsável por remover o produto pelo id digitado
+    //Utiliza a função httpConfig, passando o objeto e o metodo.
+    const handleDelete = async (e) => {
+        e.preventDefault();
+        const product = { id };
+        httpConfig(product, "DELETE");
+        clearInputs();
+    }
+
+    //Limpa os inputs do formulário
     const clearInputs = () => {
+        setId("");
         setName("");
         setDescription("");
         setPrice("");
@@ -47,26 +61,35 @@ function App() {
         <>
             <h1>Lista de produtos</h1>
             {
-                data && data.map((product) => (
-                    <div key={product.id}>
-                        <h3>{product.name}</h3>
-                        <ul>
-                            <li>
-                                Preço: R$ {product.price}
-                            </li>
-                            <li>
-                                Descrição: {product.description}
-                            </li>
-                            <li>Disponível:
-                                {
-                                    product.available ? ("Sim") : ("Não")
-                                }
-                            </li>
-                        </ul>
-                    </div>
-                ))
+                loading ? (<div>Carregando....</div>)
+                    : (
+                        data && data.map((product) =>
+                        (
+                            <div key={product.id}>
+                                <h3>{product.name}</h3>
+                                <ul>
+                                    <li>
+                                        Id: {product.id}
+                                    </li>
+                                    <li>
+                                        Preço: R$ {product.price}
+                                    </li>
+                                    <li>
+                                        Descrição: {product.description}
+                                    </li>
+                                    <li>Disponível:
+                                        {
+                                            product.available ? ("Sim") : ("Não")
+                                        }
+                                    </li>
+                                </ul>
+                            </div>)
+                        )
+                    )
             }
+            {error && <div>{error}</div>}
             <div className="add-product">
+                <h4>Adicionar Produto</h4>
                 <form onSubmit={handlePost}>
                     <label>
                         <span>Nome</span>
@@ -103,7 +126,26 @@ function App() {
                             onChange={handleCheckboxChange}
                         ></input>
                     </label>
-                    <button>Criar</button>
+                    {loading
+                        ? (<button type="button" disabled>Aguarde</button>)
+                        : (<button>Criar</button>)
+                    }
+                </form>
+            </div>
+            <br></br>
+            <div className="add-product">
+                <form onSubmit={handleDelete}>
+                    <h4>Deletar produto</h4>
+                    <label>
+                        <input
+                            name="id"
+                            type="text"
+                            placeholder="digite o id para excluir."
+                            onChange={(e) => setId(e.target.value)}
+                        >
+                        </input>
+                    </label>
+                    <input type="submit" value="Deletar produto"></input>
                 </form>
             </div>
         </>
